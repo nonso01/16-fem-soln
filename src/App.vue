@@ -1,11 +1,16 @@
 <script setup>
+import { ref } from "vue";
 import Order from "./components/Order.vue";
+import Dessert from "./components/Dessert.vue";
+
+const totalItemsCount = ref(0)
 </script>
 
 <template>
   <div class="flex container bd">
     <div class="A bd">
-      <Order />
+      <!-- <Order :cart-item-number="totalItemsCount" /> -->
+       <Dessert />
     </div>
     <div class="B bd">B</div>
   </div>
@@ -13,7 +18,7 @@ import Order from "./components/Order.vue";
 
 <style>
 .container {
-  padding: 2% 12%;
+  padding: 1% 20%;
   gap: 1rem;
   .A {
     flex: 0.7;
