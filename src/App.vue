@@ -3,16 +3,17 @@ import { ref } from "vue";
 import Order from "./components/Order.vue";
 import Dessert from "./components/Dessert.vue";
 
-const totalItemsCount = ref(0)
+const totalItemsCount = ref(0);
 </script>
 
 <template>
-  <div class="flex container bd">
+  <div class="flex container">
     <div class="A bd">
-      <!-- <Order :cart-item-number="totalItemsCount" /> -->
-       <Dessert />
+      <Dessert />
     </div>
-    <div class="B bd">B</div>
+    <div class="B bd">
+      <Order :cart-item-number="totalItemsCount" />
+    </div>
   </div>
 </template>
 
