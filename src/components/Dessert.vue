@@ -1,7 +1,12 @@
 <script setup>
 import { onMounted, ref } from "vue";
 
-// const props = defineProps({})
+const props = defineProps({
+  handlePlus: Function,
+  handleMinus: Function,
+  handleConfirmAdd: Function,
+  confirmAdd: Boolean,
+});
 const log = console.log;
 
 const data = ref(null);
@@ -19,14 +24,22 @@ onMounted(() => {
 
 <template>
   <div class="dessert flex col btw">
-    <h2>Desserts</h2>
+    <h2 class="rose-900">Desserts</h2>
     <div class="cover">
-      <div class="items" v-for="{ category, image, name, price } in data">
-        <!-- <img :src="image.desktop" /> -->
+      <div
+        class="items flex col center btw"
+        v-for="{ category, image, name, price } in data"
+      >
         <div class="content" :style="{ '--bg': `url(${image.tablet})` }">
-          <div class="add">add to cart</div>
+          <div class="add bd" :class="{ 'flex center': !confirmAdd }">
+            <div v-if="!confirmAdd" class="flex even">
+              <img src="/images/icon-add-to-cart.svg" />
+
+              <span class="rose-900 trans">Add to cart</span>
+            </div>
+          </div>
         </div>
-        <div class="details">
+        <div class="details bd">
           <p>{{ category }}</p>
           <p>{{ name }}</p>
           <p>{{ price }}</p>
@@ -40,9 +53,36 @@ onMounted(() => {
 .dessert {
   height: 100%;
 
-  p {
-    font-size: 0.6rem;
+  .details {
+    width: 90%;
+
+    p {
+      font-size: 0.7rem;
+    }
   }
+
+  .add {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 70%;
+    height: 20%;
+    border-radius: 1.5rem;
+    background-color: white;
+    /* border-width: 1.99px; */
+
+    span {
+      margin-inline: 0.625rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+
+      &:hover {
+        color: var(--red);
+      }
+    }
+  }
+
   .cover {
     flex: 0.99;
     display: grid;
@@ -51,14 +91,17 @@ onMounted(() => {
     /* using fixed size against browser console */
     gap: 0.5rem;
   }
+
   .items {
     /* border-radius: 0.625rem; */
 
     .content {
-      width: 85%;
-      height: 75%;
+      position: relative;
+      width: 78%;
+      height: 68%;
       background-image: var(--bg);
       background-size: cover;
+      border-radius: 0.25rem;
     }
   }
 }

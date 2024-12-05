@@ -59,3 +59,11 @@ html {
     justify-content: space-between;
   }
 }
+
+.trans {
+  transition-duration: 200ms;
+}
+
+.rose-900 {
+  color: var(--rose-900);
+}
