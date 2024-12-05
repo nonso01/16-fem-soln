@@ -4,12 +4,15 @@ import Order from "./components/Order.vue";
 import Dessert from "./components/Dessert.vue";
 
 const totalItemsCount = ref(0);
+
+function handleMinus() {}
+function handlePlus() {}
 </script>
 
 <template>
   <div class="flex container">
     <div class="A bd">
-      <Dessert />
+      <Dessert  />
     </div>
     <div class="B bd">
       <Order :cart-item-number="totalItemsCount" />

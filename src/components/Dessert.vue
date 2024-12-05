@@ -4,22 +4,26 @@ import { onMounted, ref } from "vue";
 const props = defineProps({
   handlePlus: Function,
   handleMinus: Function,
-  handleConfirmAdd: Function,
-  confirmAdd: Boolean,
+  handleRemoveCart: Function,
 });
 const log = console.log;
 
 const data = ref(null);
+const cartItems = ref(null);
 
 onMounted(() => {
   fetch("./data.json")
     .then((res) => res.json())
     .then((val) => {
-      log(val);
       data.value = val;
     })
     .catch((error) => console.warn(error));
 });
+
+function handleAddcart() {
+  const prev = document.querySelector(".add .prev");
+  log(prev);
+}
 </script>
 
 <template>
@@ -31,11 +35,15 @@ onMounted(() => {
         v-for="{ category, image, name, price } in data"
       >
         <div class="content" :style="{ '--bg': `url(${image.tablet})` }">
-          <div class="add bd" :class="{ 'flex center': !confirmAdd }">
-            <div v-if="!confirmAdd" class="flex even">
+          <div class="add flex center bd">
+            <div class="flex even prev" @click="handleAddcart">
               <img src="/images/icon-add-to-cart.svg" />
-
               <span class="rose-900 trans">Add to cart</span>
+            </div>
+
+            <div class="hide" ref="">
+              <!-- <img src="/images/icon-decrement-quantity.svg" /> -->
+              hello
             </div>
           </div>
         </div>

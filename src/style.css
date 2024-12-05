@@ -27,6 +27,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
 }
 
 html {
@@ -58,6 +59,10 @@ html {
   &.btw {
     justify-content: space-between;
   }
+}
+
+.hide {
+  display: none !important;
 }
 
 .trans {
