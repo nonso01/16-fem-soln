@@ -4,7 +4,9 @@ import { onMounted, ref } from "vue";
 const props = defineProps({
   handlePlus: Function,
   handleMinus: Function,
+  handleAddcart: Function,
   handleRemoveCart: Function,
+  quantities: Object,
 });
 const log = console.log;
 
@@ -20,10 +22,13 @@ onMounted(() => {
     .catch((error) => console.warn(error));
 });
 
-function handleAddcart() {
-  const prev = document.querySelector(".add .prev");
-  log(prev);
-}
+// function handleAddcart() {
+//   const prev = document.querySelector(".add .prev");
+//   // const next = document.querySelector(".add .next");
+//   // prev.classList.toggle("hide");
+//   // next.classList.toggle("hide");
+//   log(prev);
+// }
 </script>
 
 <template>
@@ -33,17 +38,29 @@ function handleAddcart() {
       <div
         class="items flex col center btw"
         v-for="{ category, image, name, price } in data"
+        :key="category"
       >
         <div class="content" :style="{ '--bg': `url(${image.tablet})` }">
           <div class="add flex center bd">
-            <div class="flex even prev" @click="handleAddcart">
-              <img src="/images/icon-add-to-cart.svg" />
+            <div class="flex even prev" @click="handleAddcart(category)">
+              <img src="/images/icon-add-to-cart.svg" alt="at-to-cart" />
               <span class="rose-900 trans">Add to cart</span>
             </div>
 
-            <div class="hide" ref="">
-              <!-- <img src="/images/icon-decrement-quantity.svg" /> -->
-              hello
+            <div class="next flex even hide">
+              <img
+                src="/images/icon-decrement-quantity.svg"
+                alt="minus"
+                class="trans"
+                @click="handleMinus"
+              />
+              <span>{{ 0 }}</span>
+              <img
+                src="/images/icon-increment-quantity.svg"
+                alt="plus"
+                class="trans"
+                @click="handlePlus"
+              />
             </div>
           </div>
         </div>
@@ -69,28 +86,6 @@ function handleAddcart() {
     }
   }
 
-  .add {
-    position: absolute;
-    bottom: -10%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    width: 70%;
-    height: 20%;
-    border-radius: 1.5rem;
-    background-color: white;
-    /* border-width: 1.99px; */
-
-    span {
-      margin-inline: 0.625rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-
-      &:hover {
-        color: var(--red);
-      }
-    }
-  }
-
   .cover {
     flex: 0.99;
     display: grid;
@@ -110,6 +105,42 @@ function handleAddcart() {
       background-image: var(--bg);
       background-size: cover;
       border-radius: 0.25rem;
+    }
+  }
+
+  .add {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 70%;
+    height: 20%;
+    border-radius: 1.5rem;
+    background-color: white;
+    /* border-width: 1.99px; */
+
+    span {
+      margin-inline: 0.625rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+
+      &:not(.next span):hover {
+        color: var(--red);
+      }
+    }
+
+    &:has(.next:not(.hide.next)) {
+      background-color: var(--red);
+    }
+
+    .next {
+      width: 100%;
+      color: var(--rose-50);
+
+      img:hover {
+        /* border: 2px solid; */
+        scale: 1.8;
+      }
     }
   }
 }
