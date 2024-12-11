@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Order from "./components/Order.vue";
 import Dessert from "./components/Dessert.vue";
 
-const totalItemsCount = ref(0);
+const log = console.log;
 const quantities = ref({});
 const isQuantityVisible = ref({});
 
@@ -13,11 +13,15 @@ function handleMinus(category) {
   if (quantities.value[category] > 0) {
     quantities.value[category]--;
   }
+
+  log(quantities.value);
 }
 function handlePlus(category) {
   if (!isQuantityVisible.value[category]) return;
   // Don't increment if not visible
   quantities.value[category] = (quantities.value[category] || 0) + 1;
+
+  log(quantities.value);
 }
 
 function handleIsQuantityVisible(category) {
@@ -31,23 +35,30 @@ function handleIsQuantityVisible(category) {
   }
 }
 
-function handleAddcart(category) {
-  if (!quantities.value[category]) {
-    quantities.value[category] = 1;
-  } else {
-    quantities.value[category]++;
-  }
-  console.log(quantities.value);
-}
+// function handleAddcart(category) {
+//   if (!quantities.value[category]) {
+//     quantities.value[category] = 1;
+//   } else {
+//     quantities.value[category]++;
+//   }
+//   console.log(quantities.value);
+// }
 </script>
 
 <template>
   <div class="flex container">
     <div class="A bd">
-      <Dessert :quantities="quantities" :handle-addcart="handleAddcart" />
+      <Dessert
+        :quantities="quantities"
+        :handle-addcart="handleAddcart"
+        :handle-minus="handleMinus"
+        :handle-plus="handlePlus"
+        :handle-is-quantity-visible="handleIsQuantityVisible"
+        :is-quantity-visible="isQuantityVisible"
+      />
     </div>
     <div class="B bd">
-      <Order :cart-item-number="totalItemsCount" />
+      <Order />
     </div>
   </div>
 </template>

@@ -4,9 +4,11 @@ import { onMounted, ref } from "vue";
 const props = defineProps({
   handlePlus: Function,
   handleMinus: Function,
-  handleAddcart: Function,
+  // handleAddcart: Function,
   handleRemoveCart: Function,
+  handleIsQuantityVisible: Function,
   quantities: Object,
+  isQuantityVisible: Object,
 });
 const log = console.log;
 
@@ -42,24 +44,28 @@ onMounted(() => {
       >
         <div class="content" :style="{ '--bg': `url(${image.tablet})` }">
           <div class="add flex center bd">
-            <div class="flex even prev" @click="handleAddcart(category)">
+            <div
+              class="flex even prev"
+              :class="{ 'hide': isQuantityVisible[category] }"
+              @click="handleIsQuantityVisible(category)"
+            >
               <img src="/images/icon-add-to-cart.svg" alt="at-to-cart" />
               <span class="rose-900 trans">Add to cart</span>
             </div>
 
-            <div class="next flex even hide">
+            <div class="next flex even" :class="{ 'hide': !isQuantityVisible[category] }">
               <img
                 src="/images/icon-decrement-quantity.svg"
                 alt="minus"
                 class="trans"
-                @click="handleMinus"
+                @click="handleMinus(category)"
               />
-              <span>{{ 0 }}</span>
+              <span>{{ quantities[category] || 0 }}</span>
               <img
                 src="/images/icon-increment-quantity.svg"
                 alt="plus"
                 class="trans"
-                @click="handlePlus"
+                @click="handlePlus(category)"
               />
             </div>
           </div>
