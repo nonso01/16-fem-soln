@@ -7,7 +7,7 @@ const log = console.log;
 const quantities = ref({});
 const isQuantityVisible = ref({});
 const notEmpty = ref(!false);
-const orderData = ref([]);
+const orderData = ref({});
 
 function handleMinus(name, price) {
   if (!isQuantityVisible.value[name]) return;
@@ -20,16 +20,16 @@ function handleMinus(name, price) {
     ? (isQuantityVisible.value[name] = false)
     : void 0;
 
-  log(quantities.value);
-  log(price);
+  // log(quantities.value);
+  log(processOreder(name, price));
 }
 function handlePlus(name, price) {
   if (!isQuantityVisible.value[name]) return;
   // Don't increment if not visible
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
-  log(quantities.value);
-  log(price);
+  // log(quantities.value);
+  log(processOreder(name, price));
 }
 
 function handleIsQuantityVisible(name) {
@@ -43,7 +43,14 @@ function handleIsQuantityVisible(name) {
   }
 }
 
-function processOreder() {}
+function processOreder(name, price) {
+  orderData.value[name] = {
+    n: quantities.value[name],
+    p: price,
+  };
+
+  return orderData.value;
+}
 </script>
 
 <template>
