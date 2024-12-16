@@ -23,14 +23,6 @@ onMounted(() => {
     })
     .catch((error) => console.warn(error));
 });
-
-// function handleAddcart() {
-//   const prev = document.querySelector(".add .prev");
-//   // const next = document.querySelector(".add .next");
-//   // prev.classList.toggle("hide");
-//   // next.classList.toggle("hide");
-//   log(prev);
-// }
 </script>
 
 <template>
@@ -42,30 +34,37 @@ onMounted(() => {
         v-for="{ category, image, name, price } in data"
         :key="category"
       >
-        <div class="content" :style="{ '--bg': `url(${image.tablet})` }">
+        <div
+          class="content"
+          :class="{ bd: isQuantityVisible[name] }"
+          :style="{ '--bg': `url(${image.tablet})` }"
+        >
           <div class="add flex center bd">
             <div
               class="flex even prev"
-              :class="{ 'hide': isQuantityVisible[category] }"
-              @click="handleIsQuantityVisible(category)"
+              :class="{ hide: isQuantityVisible[name] }"
+              @click="handleIsQuantityVisible(name)"
             >
               <img src="/images/icon-add-to-cart.svg" alt="at-to-cart" />
               <span class="rose-900 trans">Add to cart</span>
             </div>
 
-            <div class="next flex even" :class="{ 'hide': !isQuantityVisible[category] }">
+            <div
+              class="next flex even"
+              :class="{ hide: !isQuantityVisible[name] }"
+            >
               <img
                 src="/images/icon-decrement-quantity.svg"
                 alt="minus"
                 class="trans"
-                @click="handleMinus(category)"
+                @click="handleMinus(name, price)"
               />
-              <span>{{ quantities[category] || 0 }}</span>
+              <span>{{ quantities[name] || 0 }}</span>
               <img
                 src="/images/icon-increment-quantity.svg"
                 alt="plus"
                 class="trans"
-                @click="handlePlus(category)"
+                @click="handlePlus(name, price)"
               />
             </div>
           </div>
@@ -73,7 +72,7 @@ onMounted(() => {
         <div class="details bd">
           <p>{{ category }}</p>
           <p>{{ name }}</p>
-          <p>{{ price }}</p>
+          <p>${{ price }}</p>
         </div>
       </div>
     </div>

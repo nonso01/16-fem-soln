@@ -6,43 +6,44 @@ import Dessert from "./components/Dessert.vue";
 const log = console.log;
 const quantities = ref({});
 const isQuantityVisible = ref({});
+const notEmpty = ref(!false);
+const orderData = ref([]);
 
-function handleMinus(category) {
-  if (!isQuantityVisible.value[category]) return;
+function handleMinus(name, price) {
+  if (!isQuantityVisible.value[name]) return;
   // Don't decrement if not visible
-  if (quantities.value[category] > 0) {
-    quantities.value[category]--;
+  if (quantities.value[name] > 0) {
+    quantities.value[name]--;
   }
 
+  quantities.value[name] === 0
+    ? (isQuantityVisible.value[name] = false)
+    : void 0;
+
   log(quantities.value);
+  log(price);
 }
-function handlePlus(category) {
-  if (!isQuantityVisible.value[category]) return;
+function handlePlus(name, price) {
+  if (!isQuantityVisible.value[name]) return;
   // Don't increment if not visible
-  quantities.value[category] = (quantities.value[category] || 0) + 1;
+  quantities.value[name] = (quantities.value[name] || 0) + 1;
 
   log(quantities.value);
+  log(price);
 }
 
-function handleIsQuantityVisible(category) {
-  isQuantityVisible.value[category] = !isQuantityVisible.value[category];
+function handleIsQuantityVisible(name) {
+  isQuantityVisible.value[name] = !isQuantityVisible.value[name];
 
   // Optionally, reset to 0 if hiding, or initialize if showing
-  if (!isQuantityVisible[category]) {
-    quantities.value[category] = 0;
-  } else if (!(category in quantities.value)) {
-    quantities.value[category] = 0;
+  if (!isQuantityVisible[name]) {
+    quantities.value[name] = 0;
+  } else if (!(name in quantities.value)) {
+    quantities.value[name] = 0;
   }
 }
 
-// function handleAddcart(category) {
-//   if (!quantities.value[category]) {
-//     quantities.value[category] = 1;
-//   } else {
-//     quantities.value[category]++;
-//   }
-//   console.log(quantities.value);
-// }
+function processOreder() {}
 </script>
 
 <template>
@@ -50,7 +51,6 @@ function handleIsQuantityVisible(category) {
     <div class="A bd">
       <Dessert
         :quantities="quantities"
-        :handle-addcart="handleAddcart"
         :handle-minus="handleMinus"
         :handle-plus="handlePlus"
         :handle-is-quantity-visible="handleIsQuantityVisible"
@@ -58,7 +58,7 @@ function handleIsQuantityVisible(category) {
       />
     </div>
     <div class="B bd">
-      <Order />
+      <Order :not-empty="notEmpty" />
     </div>
   </div>
 </template>
