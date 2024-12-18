@@ -45,8 +45,8 @@ function handleIsQuantityVisible(name) {
 
 function processOreder(name, price) {
   orderData.value[name] = {
-    n: quantities.value[name],
-    p: price,
+    quantity: quantities.value[name],
+    price,
   };
 
   return orderData.value;

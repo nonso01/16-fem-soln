@@ -87,6 +87,7 @@ h3 {
     font-size: .8rem;
     font-weight: 600;
     color: var(--rose-100);
+    cursor: pointer;
   }
 }
 </style>

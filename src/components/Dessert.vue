@@ -80,6 +80,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
+img {
+  cursor: pointer;
+}
 .dessert {
   height: 100%;
 
