@@ -13,7 +13,7 @@ const props = defineProps({
 const log = console.log;
 
 const data = ref(null);
-const cartItems = ref(null);
+
 
 onMounted(() => {
   fetch("./data.json")
@@ -72,7 +72,7 @@ onMounted(() => {
         <div class="details bd">
           <p>{{ category }}</p>
           <p>{{ name }}</p>
-          <p>${{ price }}</p>
+          <p>${{ price.toFixed(2) }}</p>
         </div>
       </div>
     </div>

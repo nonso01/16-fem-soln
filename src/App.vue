@@ -21,7 +21,9 @@ function handleMinus(name, price) {
     : void 0;
 
   // log(quantities.value);
-  log(processOreder(name, price));
+
+  let test = processOreder(name, price);
+  log(test);
 }
 function handlePlus(name, price) {
   if (!isQuantityVisible.value[name]) return;
@@ -29,7 +31,9 @@ function handlePlus(name, price) {
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
   // log(quantities.value);
-  log(processOreder(name, price));
+
+  let test = processOreder(name, price);
+  log(test);
 }
 
 function handleIsQuantityVisible(name) {
@@ -48,6 +52,8 @@ function processOreder(name, price) {
     quantity: quantities.value[name],
     price,
   };
+
+  orderData.value[name].quantity === 0 ? delete orderData.value[name] : void 0;
 
   return orderData.value;
 }
