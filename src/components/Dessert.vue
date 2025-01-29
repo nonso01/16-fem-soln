@@ -125,7 +125,7 @@ img {
     height: 20%;
     border-radius: 1.5rem;
     background-color: white;
-    /* border-width: 1.99px; */
+    
 
     span {
       margin-inline: 0.625rem;
