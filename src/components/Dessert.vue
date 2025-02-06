@@ -138,6 +138,7 @@ img {
   }
 
   .add {
+    border-width: 1px;
     position: absolute;
     bottom: -10%;
     left: 50%;
