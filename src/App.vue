@@ -61,6 +61,8 @@ function handleIsNotEmpty() {
   Object.entries(orderData.value).length === 0
     ? (notEmpty.value = false)
     : (notEmpty.value = true);
+
+  log(Object.entries(orderData.value));
 }
 </script>
 
@@ -76,7 +78,7 @@ function handleIsNotEmpty() {
       />
     </div>
     <div class="B">
-      <Order :not-empty="notEmpty" />
+      <Order :not-empty="notEmpty" :data="orderData" />
     </div>
   </div>
 </template>
@@ -90,7 +92,7 @@ function handleIsNotEmpty() {
     flex: 0.7;
   }
   .B {
-    flex: 0.3;
+    flex: 0.28;
   }
 }
 

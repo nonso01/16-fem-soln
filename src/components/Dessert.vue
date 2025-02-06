@@ -35,7 +35,7 @@ onMounted(() => {
       >
         <div
           class="content"
-          :class="{ bd: isQuantityVisible[name] }"
+          :class="{ colored: isQuantityVisible[name] }"
           :style="{ '--bg': `url(${image.tablet})` }"
         >
           <div class="add flex center bd">
@@ -121,6 +121,8 @@ img {
     /* border-radius: 0.625rem; */
 
     .content {
+      border: 2px solid transparent;
+      transition-duration: 100ms;
       position: relative;
       width: 90%;
       height: 68%;
@@ -128,6 +130,10 @@ img {
       background-size: cover;
       background-repeat: no-repeat;
       border-radius: 0.25rem;
+
+      &.colored {
+        border-color: var(--red);
+      }
     }
   }
 
