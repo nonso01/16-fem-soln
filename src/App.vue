@@ -6,7 +6,7 @@ import Dessert from "./components/Dessert.vue";
 const log = console.log;
 const quantities = ref({});
 const isQuantityVisible = ref({});
-const notEmpty = ref(!false);
+const notEmpty = ref(false);
 const orderData = ref({});
 
 function handleMinus(name, price) {
@@ -20,20 +20,19 @@ function handleMinus(name, price) {
     ? (isQuantityVisible.value[name] = false)
     : void 0;
 
-  // log(quantities.value);
-
   let test = processOreder(name, price);
-  log(test);
+  // log(test);
+  handleIsNotEmpty();
 }
+
 function handlePlus(name, price) {
   if (!isQuantityVisible.value[name]) return;
   // Don't increment if not visible
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
-  // log(quantities.value);
-
   let test = processOreder(name, price);
-  log(test);
+  // log(test);
+  handleIsNotEmpty();
 }
 
 function handleIsQuantityVisible(name) {
@@ -57,11 +56,17 @@ function processOreder(name, price) {
 
   return orderData.value;
 }
+
+function handleIsNotEmpty() {
+  Object.entries(orderData.value).length === 0
+    ? (notEmpty.value = false)
+    : (notEmpty.value = true);
+}
 </script>
 
 <template>
   <div class="flex container">
-    <div class="A bd">
+    <div class="A">
       <Dessert
         :quantities="quantities"
         :handle-minus="handleMinus"
@@ -70,7 +75,7 @@ function processOreder(name, price) {
         :is-quantity-visible="isQuantityVisible"
       />
     </div>
-    <div class="B bd">
+    <div class="B">
       <Order :not-empty="notEmpty" />
     </div>
   </div>

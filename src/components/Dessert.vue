@@ -14,7 +14,6 @@ const log = console.log;
 
 const data = ref(null);
 
-
 onMounted(() => {
   fetch("./data.json")
     .then((res) => res.json())
@@ -30,7 +29,7 @@ onMounted(() => {
     <h2 class="rose-900">Desserts</h2>
     <div class="cover">
       <div
-        class="items flex col center btw"
+        class="items flex col btw"
         v-for="{ category, image, name, price } in data"
         :key="category"
       >
@@ -69,10 +68,10 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <div class="details bd">
-          <p>{{ category }}</p>
-          <p>{{ name }}</p>
-          <p>${{ price.toFixed(2) }}</p>
+        <div class="details flex even">
+          <p class="cat">{{ category }}</p>
+          <p class="name">{{ name }}</p>
+          <p class="price">${{ price.toFixed(2) }}</p>
         </div>
       </div>
     </div>
@@ -87,10 +86,25 @@ img {
   height: 100%;
 
   .details {
-    width: 90%;
+    /* border-color: red; */
+    height: 21%;
+    flex-direction: column;
+    font-weight: 600;
+    /* width: 90%; */
 
     p {
       font-size: 0.7rem;
+    }
+
+    .cat {
+      color: var(--rose-500);
+    }
+    .name {
+      color: var(--rose-900);
+      font-size: 0.8rem;
+    }
+    .price {
+      color: var(--red);
     }
   }
 
@@ -108,10 +122,11 @@ img {
 
     .content {
       position: relative;
-      width: 78%;
+      width: 90%;
       height: 68%;
       background-image: var(--bg);
       background-size: cover;
+      background-repeat: no-repeat;
       border-radius: 0.25rem;
     }
   }
@@ -125,7 +140,6 @@ img {
     height: 20%;
     border-radius: 1.5rem;
     background-color: white;
-    
 
     span {
       margin-inline: 0.625rem;
