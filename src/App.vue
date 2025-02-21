@@ -21,7 +21,7 @@ function handleMinus(name, price) {
     : void 0;
 
   let test = processOreder(name, price);
-  // log(test);
+
   handleIsNotEmpty();
 }
 
@@ -31,7 +31,7 @@ function handlePlus(name, price) {
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
   let test = processOreder(name, price);
-  // log(test);
+
   handleIsNotEmpty();
 }
 
@@ -69,6 +69,7 @@ function handleCancelOrderItem(name) {
   if (orderData.value[name].quantity !== 0) {
     delete orderData.value[name];
     quantities.value[name] = 0;
+    isQuantityVisible.value[name] = false;
   }
 }
 </script>
