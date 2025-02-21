@@ -36,7 +36,7 @@ onMounted(() => {
         <div
           class="content"
           :class="{ colored: isQuantityVisible[name] }"
-          :style="{ '--bg': `url(${image.tablet})` }"
+          :style="{ '--bg': `url(${image.desktop})` }"
         >
           <div class="add flex center bd">
             <div

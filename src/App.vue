@@ -64,6 +64,10 @@ function handleIsNotEmpty() {
 
   log(Object.entries(orderData.value));
 }
+
+function handleCancelOrderItem() {
+  alert('cancel order')
+}
 </script>
 
 <template>
@@ -78,7 +82,11 @@ function handleIsNotEmpty() {
       />
     </div>
     <div class="B">
-      <Order :not-empty="notEmpty" :data="orderData" />
+      <Order
+        :not-empty="notEmpty"
+        :data="orderData"
+        :handleCancelOrderItem="handleCancelOrderItem"
+      />
     </div>
   </div>
 </template>
