@@ -62,11 +62,14 @@ function handleIsNotEmpty() {
     ? (notEmpty.value = false)
     : (notEmpty.value = true);
 
-  log(Object.entries(orderData.value));
+  // log(Object.entries(orderData.value));
 }
 
-function handleCancelOrderItem() {
-  alert('cancel order')
+function handleCancelOrderItem(name) {
+  if (orderData.value[name].quantity !== 0) {
+    delete orderData.value[name];
+    quantities.value[name] = 0;
+  }
 }
 </script>
 

@@ -39,7 +39,7 @@ const props = defineProps({
               >
             </p>
           </div>
-          <div class="cancel flex center bd" @click="handleCancelOrderItem">
+          <div class="cancel flex center bd" @click="handleCancelOrderItem(item[0])">
             <img src="/images/icon-remove-item.svg" alt="cancel svg" />
           </div>
         </div>
