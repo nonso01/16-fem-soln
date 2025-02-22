@@ -8,6 +8,7 @@ const quantities = ref({});
 const isQuantityVisible = ref({});
 const notEmpty = ref(false);
 const orderData = ref({});
+const orderTotalCost = ref(0);
 
 function handleMinus(name, price) {
   if (!isQuantityVisible.value[name]) return;
@@ -23,6 +24,7 @@ function handleMinus(name, price) {
   let test = processOreder(name, price);
 
   handleIsNotEmpty();
+  processOrederTotal();
 }
 
 function handlePlus(name, price) {
@@ -33,6 +35,7 @@ function handlePlus(name, price) {
   let test = processOreder(name, price);
 
   handleIsNotEmpty();
+  processOrederTotal();
 }
 
 function handleIsQuantityVisible(name) {
@@ -43,6 +46,20 @@ function handleIsQuantityVisible(name) {
     quantities.value[name] = 0;
   } else if (!(name in quantities.value)) {
     quantities.value[name] = 0;
+  }
+}
+
+function handleIsNotEmpty() {
+  Object.entries(orderData.value).length === 0
+    ? (notEmpty.value = false)
+    : (notEmpty.value = true);
+}
+
+function handleCancelOrderItem(name) {
+  if (orderData.value[name].quantity !== 0) {
+    delete orderData.value[name];
+    quantities.value[name] = 0;
+    isQuantityVisible.value[name] = false;
   }
 }
 
@@ -57,20 +74,14 @@ function processOreder(name, price) {
   return orderData.value;
 }
 
-function handleIsNotEmpty() {
-  Object.entries(orderData.value).length === 0
-    ? (notEmpty.value = false)
-    : (notEmpty.value = true);
-
-  // log(Object.entries(orderData.value));
-}
-
-function handleCancelOrderItem(name) {
-  if (orderData.value[name].quantity !== 0) {
-    delete orderData.value[name];
-    quantities.value[name] = 0;
-    isQuantityVisible.value[name] = false;
-  }
+function processOrederTotal() {
+  let numbers = [];
+  Object.entries(orderData.value).forEach((item) => {
+    let mul = item[1].price * item[1].quantity;
+    numbers.push(mul);
+  });
+  orderTotalCost.value = numbers.reduce((acc, val) => acc + val, 0);
+  console.table([numbers, orderTotalCost.value]);
 }
 </script>
 
@@ -89,6 +100,7 @@ function handleCancelOrderItem(name) {
       <Order
         :not-empty="notEmpty"
         :data="orderData"
+        :total="orderTotalCost"
         :handleCancelOrderItem="handleCancelOrderItem"
       />
     </div>

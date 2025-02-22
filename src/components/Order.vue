@@ -8,8 +8,6 @@ const props = defineProps({
   data: Object,
   handleCancelOrderItem: Function,
 });
-
-// const processOreder = ref(data);
 </script>
 
 <template>
@@ -39,7 +37,10 @@ const props = defineProps({
               >
             </p>
           </div>
-          <div class="cancel flex center bd" @click="handleCancelOrderItem(item[0])">
+          <div
+            class="cancel flex center bd"
+            @click="handleCancelOrderItem(item[0])"
+          >
             <img src="/images/icon-remove-item.svg" alt="cancel svg" />
           </div>
         </div>
