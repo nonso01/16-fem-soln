@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 const props = defineProps({
-  cartItemNumber: Number,
+  totalQuantity: Number,
   notEmpty: Boolean,
   total: Number,
   data: Object,
@@ -13,7 +13,7 @@ const props = defineProps({
 <template>
   <div class="order flex col btw trans">
     <div class="title">
-      <h3>Your Cart ({{ cartItemNumber || 0 }})</h3>
+      <h3>Your Cart ({{ totalQuantity || 0 }})</h3>
     </div>
     <div class="items">
       <div v-if="!notEmpty" class="flex center col">

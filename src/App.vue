@@ -4,11 +4,14 @@ import Order from "./components/Order.vue";
 import Dessert from "./components/Dessert.vue";
 
 const log = console.log;
+
+// const data = ref(null);
 const quantities = ref({});
 const isQuantityVisible = ref({});
 const notEmpty = ref(false);
 const orderData = ref({});
 const orderTotalCost = ref(0);
+const orderTotalQuantity = ref(0);
 
 function handleMinus(name, price) {
   if (!isQuantityVisible.value[name]) return;
@@ -21,7 +24,7 @@ function handleMinus(name, price) {
     ? (isQuantityVisible.value[name] = false)
     : void 0;
 
-  let test = processOreder(name, price);
+  processOreder(name, price);
 
   handleIsNotEmpty();
   processOrederTotal();
@@ -32,7 +35,7 @@ function handlePlus(name, price) {
   // Don't increment if not visible
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
-  let test = processOreder(name, price);
+  processOreder(name, price);
 
   handleIsNotEmpty();
   processOrederTotal();
@@ -60,7 +63,7 @@ function handleCancelOrderItem(name) {
     delete orderData.value[name];
     quantities.value[name] = 0;
     isQuantityVisible.value[name] = false;
-    
+
     processOrederTotal();
   }
 }
@@ -77,13 +80,21 @@ function processOreder(name, price) {
 }
 
 function processOrederTotal() {
-  let numbers = [];
+  let num = [];
   Object.entries(orderData.value).forEach((item) => {
     let mul = item[1].price * item[1].quantity;
-    numbers.push(mul);
+    num.push(mul);
   });
-  orderTotalCost.value = numbers.reduce((acc, val) => acc + val, 0);
-  // console.table([numbers, orderTotalCost.value]);
+  orderTotalCost.value = num.reduce((acc, val) => acc + val, 0);
+  processOrederQuantity();
+}
+
+function processOrederQuantity() {
+  let num = [];
+  Object.entries(orderData.value).forEach((item) => {
+    num.push(item[1].quantity);
+  });
+  orderTotalQuantity.value = num.reduce((acc, val) => acc + val, 0);
 }
 </script>
 
@@ -103,6 +114,7 @@ function processOrederTotal() {
         :not-empty="notEmpty"
         :data="orderData"
         :total="orderTotalCost"
+        :totalQuantity="orderTotalQuantity"
         :handleCancelOrderItem="handleCancelOrderItem"
       />
     </div>
