@@ -60,6 +60,8 @@ function handleCancelOrderItem(name) {
     delete orderData.value[name];
     quantities.value[name] = 0;
     isQuantityVisible.value[name] = false;
+    
+    processOrederTotal();
   }
 }
 
@@ -81,7 +83,7 @@ function processOrederTotal() {
     numbers.push(mul);
   });
   orderTotalCost.value = numbers.reduce((acc, val) => acc + val, 0);
-  console.table([numbers, orderTotalCost.value]);
+  // console.table([numbers, orderTotalCost.value]);
 }
 </script>
 
