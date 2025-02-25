@@ -70,8 +70,11 @@ function handleCancelOrderItem(name) {
   }
 }
 
+function handleConfirmOrder() {
+  showOverlay.value = true;
+}
 function handleStartNewOrder() {
-  
+  showOverlay.value = false;
 }
 
 function processOreder(name, price) {
@@ -122,12 +125,13 @@ function processOrederQuantity() {
         :total="orderTotalCost"
         :totalQuantity="orderTotalQuantity"
         :handleCancelOrderItem="handleCancelOrderItem"
+        :handleConfirmOrder="handleConfirmOrder"
       />
     </div>
   </div>
 
   <Transition>
-    <Confirm />
+    <Confirm v-if="showOverlay" :handleStartNewOrder="handleStartNewOrder" />
   </Transition>
 
   <Transition>

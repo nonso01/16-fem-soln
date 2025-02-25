@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   finalData: Object,
+  totalCost: Number,
   handleStartNewOrder: Function,
 });
 </script>
@@ -17,9 +18,31 @@ const props = defineProps({
       </div>
     </div>
 
-    <div class="receipt bd"></div>
+    <div class="receipt flex col btw">
+      <div class="items bd">
+        <div class="item flex btw">
+          <div class="p flex bd">
+            <div class="i">
+              <img src="" alt="" />
+            </div>
+            <div class="q bd">
+              <p>yellow</p>
+              <p>banana</p>
+            </div>
+          </div>
 
-    <div class="btn flex center bd">Start New Order</div>
+          <h4>$0</h4>
+        </div>
+      </div>
+      <div class="bd flex btw">
+        <p>Order Total</p>
+        <h2>${{ totalCost || 0 }}</h2>
+      </div>
+    </div>
+
+    <div class="btn flex center bd" @click="handleStartNewOrder">
+      Start New Order
+    </div>
   </div>
 </template>
 
@@ -32,10 +55,20 @@ const props = defineProps({
   transform: translate(-50%, -50%);
   width: 28.2rem;
   height: 34.4rem;
-  padding: 0.5%;
-  border-radius: 0.7rem;
+  padding: 0.8%;
+  border-radius: 0.8rem;
   background-color: hsla(20, 50%, 98%, 0.85);
   backdrop-filter: blur(5px);
+
+  h1,
+  h2,
+  h4 {
+    color: var(--rose-900);
+  }
+  p {
+    color: var(--rose-500);
+    font-size: 0.85rem;
+  }
 
   .check {
     height: 30%;
@@ -43,10 +76,34 @@ const props = defineProps({
 
   .receipt {
     height: 55%;
+    padding: 2%;
+
+    .p {
+      width: 80%;
+    }
+    .q {
+      margin-left: 3%;
+      width: 100%;
+    }
+
+    .i img {
+      height: 45px;
+      width: 45px;
+      background: #000;
+    }
+
+    .items {
+      height: 80%;
+    }
+
+    .item {
+      height: 3.38rem;
+      margin-block: 1%;
+    }
   }
 
   .btn {
-    height: 50px;
+    height: 3.13rem;
     background-color: var(--red);
     border-radius: 2rem;
     font-size: 0.8rem;

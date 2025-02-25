@@ -7,6 +7,7 @@ const props = defineProps({
   total: Number,
   data: Object,
   handleCancelOrderItem: Function,
+  handleConfirmOrder: Function,
 });
 </script>
 
@@ -54,7 +55,9 @@ const props = defineProps({
             <img src="/images/icon-carbon-neutral.svg" alt="carbon" />
             <span>This is a <b>carbon-neutral</b> delivery</span>
           </div>
-          <div class="btn flex center">Confirm Order</div>
+          <div class="btn flex center" @click="handleConfirmOrder">
+            Confirm Order
+          </div>
         </div>
       </div>
     </div>
