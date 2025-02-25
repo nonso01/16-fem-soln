@@ -37,6 +37,7 @@ html {
   #app,
   .container {
     min-height: inherit;
+    position: relative;
   }
 }
 

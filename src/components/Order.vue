@@ -38,7 +38,7 @@ const props = defineProps({
             </p>
           </div>
           <div
-            class="cancel flex center bd"
+            class="cancel flex center trans bd"
             @click="handleCancelOrderItem(item[0])"
           >
             <img src="/images/icon-remove-item.svg" alt="cancel svg" />
@@ -144,6 +144,10 @@ h3 {
     border-radius: 50%;
     border-color: var(--rose-300);
     cursor: pointer;
+
+    &:hover {
+      filter: grayscale(70%);
+    }
   }
 }
 </style>

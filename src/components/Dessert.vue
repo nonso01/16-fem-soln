@@ -118,8 +118,6 @@ img {
   }
 
   .items {
-    /* border-radius: 0.625rem; */
-
     .content {
       border: 2px solid transparent;
       transition-duration: 100ms;
@@ -129,7 +127,8 @@ img {
       background-image: var(--bg);
       background-size: cover;
       background-repeat: no-repeat;
-      border-radius: 0.25rem;
+      background-clip: content-box; /* enhances the bg curvature */
+      border-radius: 0.65rem;
 
       &.colored {
         border-color: var(--red);

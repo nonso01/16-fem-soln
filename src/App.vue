@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import Order from "./components/Order.vue";
 import Dessert from "./components/Dessert.vue";
+import Confirm from "./components/Confirm.vue";
 
 const log = console.log;
 
@@ -12,6 +13,7 @@ const notEmpty = ref(false);
 const orderData = ref({});
 const orderTotalCost = ref(0);
 const orderTotalQuantity = ref(0);
+const showOverlay = ref(false);
 
 function handleMinus(name, price) {
   if (!isQuantityVisible.value[name]) return;
@@ -68,6 +70,10 @@ function handleCancelOrderItem(name) {
   }
 }
 
+function handleStartNewOrder() {
+  
+}
+
 function processOreder(name, price) {
   orderData.value[name] = {
     quantity: quantities.value[name],
@@ -119,6 +125,14 @@ function processOrederQuantity() {
       />
     </div>
   </div>
+
+  <Transition>
+    <Confirm />
+  </Transition>
+
+  <Transition>
+    <div class="overlay" v-if="showOverlay"></div>
+  </Transition>
 </template>
 
 <style>
@@ -132,6 +146,16 @@ function processOrederQuantity() {
   .B {
     flex: 0.28;
   }
+}
+
+.overlay {
+  height: 100lvh;
+  width: 100lvw;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  background: #2727276b;
+  backdrop-filter: blur(5px);
 }
 
 @media screen and (min-width: 1200px) {
