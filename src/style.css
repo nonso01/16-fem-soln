@@ -41,7 +41,7 @@ html {
   }
 
   &:has(div.overlay) {
-    /* scrollbar-gutter: ; */
+    scrollbar-gutter: stable;
     overflow: hidden;
   }
 }

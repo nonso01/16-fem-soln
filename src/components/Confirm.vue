@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  finalData: Object,
+  data: Object,
   totalCost: Number,
   handleStartNewOrder: Function,
 });
@@ -8,39 +8,44 @@ const props = defineProps({
 
 <template>
   <div class="confirm flex col btw">
-    <div class="check flex col even bd">
-      <div class="bd">
+    <div class="check flex col even ">
+      <div class="">
         <img src="/images/icon-order-confirmed.svg" alt="order confirmed" />
       </div>
-      <div class="bd">
+      <div class="">
         <h1>Order Confirmed</h1>
         <p>We hope you enjoy your food!</p>
       </div>
     </div>
 
     <div class="receipt flex col btw">
-      <div class="items bd">
-        <div class="item flex btw">
-          <div class="p flex center bd">
+      <div class="items ">
+        <div class="item flex btw" v-for="item in Object.entries(data)">
+          <div class="p flex center ">
             <div class="i">
-              <img src="" alt="" />
+              <img :src="item[1].imageSrc" alt="" />
             </div>
-            <div class="q flex col btw bd">
-              <p>yellow</p>
-              <p><span>quantity</span><span>$price</span></p>
+            <div class="q flex col btw ">
+              <p class="main">{{ item[0] }}</p>
+              <p>
+                <span class="quantity">{{ item[1].quantity }}x</span>
+                <span
+                  >${{ (item[1].quantity * item[1].price).toFixed(2) }}</span
+                >
+              </p>
             </div>
           </div>
 
-          <h4>$0</h4>
+          <h5>${{ (item[1].quantity * item[1].price).toFixed(2) }}</h5>
         </div>
       </div>
-      <div class="bd flex btw center">
+      <div class=" flex btw center">
         <p>Order Total</p>
-        <h2>${{ totalCost || 0 }}</h2>
+        <h2>${{ totalCost.toFixed(2) || 0 }}</h2>
       </div>
     </div>
 
-    <div class="btn flex center bd" @click="handleStartNewOrder">
+    <div class="btn flex center " @click="handleStartNewOrder">
       Start New Order
     </div>
   </div>
@@ -62,11 +67,12 @@ const props = defineProps({
 
   h1,
   h2,
-  h4 {
+  h5 {
     color: var(--rose-900);
   }
-  h4 {
+  h5 {
     align-self: center;
+    margin-inline: 1%;
   }
   p {
     color: var(--rose-500);
@@ -80,28 +86,61 @@ const props = defineProps({
   .receipt {
     height: 55%;
     padding: 2%;
+    background-color: hsla(13, 29%, 94%, 0.794);
+    border-radius: 0.6rem;
 
     .p {
       width: 80%;
     }
+
     .q {
       margin-left: 3%;
       width: 80%;
+      .main {
+        color: var(--rose-900);
+      }
+      .quantity {
+        color: var(--red);
+        margin-right: 5%;
+      }
     }
 
-    .i  {
+    .i {
       height: 45px;
       width: 45px;
       background: #000;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .items {
       min-height: 80%;
+      overflow: auto;
+      &::-webkit-scrollbar-track {
+        /* box-shadow: inset 0 0 6px rgb(0 0 0 / 0.3);
+        border-radius: 0.625rem;
+        background-color: #f5f5f5; */
+        display: none;
+      }
+      &::-webkit-scrollbar {
+        /* width: 0.2rem;
+        background-color: #f5f5f5; */
+        display: none;
+      }
+      &::-webkit-scrollbar-thumb {
+        /* border-radius: 0.2rem;
+        box-shadow: inset 0 0 6px rgb(0 0 0 / 0.3);
+        background-color: var(--rose-300); */
+        display: none;
+      }
     }
 
     .item {
       height: 3.38rem;
-      margin-block: 1%;
+      margin-block: 2.5%;
+      border-bottom: 1px solid var(--rose-300);
     }
   }
 

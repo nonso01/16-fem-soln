@@ -15,7 +15,7 @@ const orderTotalCost = ref(0);
 const orderTotalQuantity = ref(0);
 const showOverlay = ref(false);
 
-function handleMinus(name, price) {
+function handleMinus(name, price, imageSrc) {
   if (!isQuantityVisible.value[name]) return;
   // Don't decrement if not visible
   if (quantities.value[name] > 0) {
@@ -26,21 +26,22 @@ function handleMinus(name, price) {
     ? (isQuantityVisible.value[name] = false)
     : void 0;
 
-  processOreder(name, price);
+  processOreder(name, price, imageSrc);
 
   handleIsNotEmpty();
   processOrederTotal();
 }
 
-function handlePlus(name, price) {
+function handlePlus(name, price, imageSrc) {
   if (!isQuantityVisible.value[name]) return;
   // Don't increment if not visible
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
-  processOreder(name, price);
+  processOreder(name, price, imageSrc);
 
   handleIsNotEmpty();
   processOrederTotal();
+  // log(orderData.value)
 }
 
 function handleIsQuantityVisible(name) {
@@ -74,13 +75,14 @@ function handleConfirmOrder() {
   showOverlay.value = true;
 }
 function handleStartNewOrder() {
-  showOverlay.value = false;
+  // showOverlay.value = false;
 }
 
-function processOreder(name, price) {
+function processOreder(name, price, imageSrc) {
   orderData.value[name] = {
     quantity: quantities.value[name],
     price,
+    imageSrc,
   };
 
   orderData.value[name].quantity === 0 ? delete orderData.value[name] : void 0;
@@ -130,14 +132,25 @@ function processOrederQuantity() {
     </div>
   </div>
 
-  <Transition>
-    <Confirm v-if="showOverlay" 
-    :total-cost="orderTotalCost"
-    :handleStartNewOrder="handleStartNewOrder" />
+  <Transition name="in">
+    <Confirm
+      v-if="showOverlay"
+      :data="orderData"
+      :total-cost="orderTotalCost"
+      :handleStartNewOrder="handleStartNewOrder"
+    />
   </Transition>
 
   <Transition>
-    <div class="overlay" v-if="showOverlay"></div>
+    <div
+      class="overlay"
+      v-if="showOverlay"
+      @click="
+        () => {
+          showOverlay = !showOverlay;
+        }
+      "
+    ></div>
   </Transition>
 </template>
 
@@ -160,8 +173,17 @@ function processOrederQuantity() {
   position: fixed;
   top: 0;
   z-index: 5;
-  background: #2727276b;
+  background: #27272797;
   backdrop-filter: blur(5px);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.25s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 
 @media screen and (min-width: 1200px) {

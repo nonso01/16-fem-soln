@@ -4,7 +4,6 @@ import { onMounted, ref } from "vue";
 const props = defineProps({
   handlePlus: Function,
   handleMinus: Function,
-  // handleAddcart: Function,
   handleRemoveCart: Function,
   handleIsQuantityVisible: Function,
   quantities: Object,
@@ -56,14 +55,14 @@ onMounted(() => {
                 src="/images/icon-decrement-quantity.svg"
                 alt="minus"
                 class="trans"
-                @click="handleMinus(name, price)"
+                @click="handleMinus(name, price, image.thumbnail)"
               />
               <span>{{ quantities[name] || 0 }}</span>
               <img
                 src="/images/icon-increment-quantity.svg"
                 alt="plus"
                 class="trans"
-                @click="handlePlus(name, price)"
+                @click="handlePlus(name, price, image.thumbnail)"
               />
             </div>
           </div>

@@ -116,6 +116,10 @@ h3 {
     font-weight: 600;
     color: var(--rose-100);
     cursor: pointer;
+
+    &:hover {
+      filter: grayscale(30%);
+    }
   }
 }
 
