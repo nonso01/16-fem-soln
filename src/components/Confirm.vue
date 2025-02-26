@@ -21,20 +21,20 @@ const props = defineProps({
     <div class="receipt flex col btw">
       <div class="items bd">
         <div class="item flex btw">
-          <div class="p flex bd">
+          <div class="p flex center bd">
             <div class="i">
               <img src="" alt="" />
             </div>
-            <div class="q bd">
+            <div class="q flex col btw bd">
               <p>yellow</p>
-              <p>banana</p>
+              <p><span>quantity</span><span>$price</span></p>
             </div>
           </div>
 
           <h4>$0</h4>
         </div>
       </div>
-      <div class="bd flex btw">
+      <div class="bd flex btw center">
         <p>Order Total</p>
         <h2>${{ totalCost || 0 }}</h2>
       </div>
@@ -65,6 +65,9 @@ const props = defineProps({
   h4 {
     color: var(--rose-900);
   }
+  h4 {
+    align-self: center;
+  }
   p {
     color: var(--rose-500);
     font-size: 0.85rem;
@@ -83,17 +86,17 @@ const props = defineProps({
     }
     .q {
       margin-left: 3%;
-      width: 100%;
+      width: 80%;
     }
 
-    .i img {
+    .i  {
       height: 45px;
       width: 45px;
       background: #000;
     }
 
     .items {
-      height: 80%;
+      min-height: 80%;
     }
 
     .item {
@@ -106,7 +109,7 @@ const props = defineProps({
     height: 3.13rem;
     background-color: var(--red);
     border-radius: 2rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--rose-100);
     cursor: pointer;

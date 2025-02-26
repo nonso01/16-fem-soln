@@ -131,7 +131,9 @@ function processOrederQuantity() {
   </div>
 
   <Transition>
-    <Confirm v-if="showOverlay" :handleStartNewOrder="handleStartNewOrder" />
+    <Confirm v-if="showOverlay" 
+    :total-cost="orderTotalCost"
+    :handleStartNewOrder="handleStartNewOrder" />
   </Transition>
 
   <Transition>

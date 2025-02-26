@@ -39,6 +39,11 @@ html {
     min-height: inherit;
     position: relative;
   }
+
+  &:has(div.overlay) {
+    /* scrollbar-gutter: ; */
+    overflow: hidden;
+  }
 }
 
 .bd {
