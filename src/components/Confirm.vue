@@ -8,24 +8,24 @@ const props = defineProps({
 
 <template>
   <div class="confirm flex col btw">
-    <div class="check flex col even bd">
-      <div class="bd">
+    <div class="check flex col even">
+      <div class="">
         <img src="/images/icon-order-confirmed.svg" alt="order confirmed" />
       </div>
-      <div class="bd">
+      <div class="">
         <h1>Order Confirmed</h1>
         <p>We hope you enjoy your food!</p>
       </div>
     </div>
 
     <div class="receipt flex col btw">
-      <div class="items ">
+      <div class="items">
         <div class="item flex btw" v-for="item in Object.entries(data)">
-          <div class="p flex center ">
+          <div class="p flex center">
             <div class="i">
               <img :src="item[1].imageSrc" alt="" />
             </div>
-            <div class="q flex col btw ">
+            <div class="q flex col btw">
               <p class="main">{{ item[0] }}</p>
               <p>
                 <span class="quantity">{{ item[1].quantity }}x</span>
@@ -39,13 +39,13 @@ const props = defineProps({
           <h5>${{ (item[1].quantity * item[1].price).toFixed(2) }}</h5>
         </div>
       </div>
-      <div class=" flex btw center">
+      <div class="flex btw center">
         <p>Order Total</p>
         <h2>${{ totalCost.toFixed(2) || 0 }}</h2>
       </div>
     </div>
 
-    <div class="btn flex center " @click="handleStartNewOrder">
+    <div class="btn flex center" @click="handleStartNewOrder">
       Start New Order
     </div>
   </div>
