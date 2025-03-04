@@ -49,7 +49,7 @@ const props = defineProps({
         <div class="order-total flex col even">
           <div class="flex btw center">
             <p>Order Total</p>
-            <h3>${{ total || 10 }}</h3>
+            <h3>${{ total || 0 }}</h3>
           </div>
           <div class="carbon flex center even">
             <img src="/images/icon-carbon-neutral.svg" alt="carbon" />

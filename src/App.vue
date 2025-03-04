@@ -6,7 +6,6 @@ import Confirm from "./components/Confirm.vue";
 
 const log = console.log;
 
-// const data = ref(null);
 const quantities = ref({});
 const isQuantityVisible = ref({});
 const notEmpty = ref(false);
@@ -14,6 +13,7 @@ const orderData = ref({});
 const orderTotalCost = ref(0);
 const orderTotalQuantity = ref(0);
 const showOverlay = ref(false);
+const showOC = ref(false);
 
 function handleMinus(name, price, imageSrc) {
   if (!isQuantityVisible.value[name]) return;
@@ -41,7 +41,6 @@ function handlePlus(name, price, imageSrc) {
 
   handleIsNotEmpty();
   processOrederTotal();
-  // log(orderData.value)
 }
 
 function handleIsQuantityVisible(name) {
@@ -67,6 +66,8 @@ function handleCancelOrderItem(name) {
     quantities.value[name] = 0;
     isQuantityVisible.value[name] = false;
 
+    handleIsNotEmpty();
+
     processOrederTotal();
   }
 }
@@ -75,7 +76,22 @@ function handleConfirmOrder() {
   showOverlay.value = true;
 }
 function handleStartNewOrder() {
-  // showOverlay.value = false;
+  showOverlay.value = false;
+
+  setTimeout(() => {
+    // reset to default
+    showOC.value = true;
+    notEmpty.value = false;
+    orderData.value = {};
+    quantities.value = {};
+    isQuantityVisible.value = {};
+    orderTotalCost.value = 0;
+    orderTotalQuantity.value = 0;
+  }, 600);
+
+  setTimeout(() => {
+    showOC.value = false;
+  }, 1500);
 }
 
 function processOreder(name, price, imageSrc) {
@@ -152,6 +168,13 @@ function processOrederQuantity() {
       "
     ></div>
   </Transition>
+
+  <Transition name="oc">
+    <div class="o-c even center flex" v-if="showOC">
+      <img src="/images/icon-order-confirmed.svg" alt="confirmed" />
+      <p>Order Confirmed</p>
+    </div>
+  </Transition>
 </template>
 
 <style>
@@ -177,6 +200,18 @@ function processOrederQuantity() {
   backdrop-filter: blur(5px);
 }
 
+.o-c {
+  position: fixed;
+  top: 2%;
+  width: 230px;
+  height: 70px;
+  border-radius: 0.625rem;
+  background-color: rgb(255, 255, 255);
+  color: var(--rose-900);
+  font-weight: bold;
+  box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.2);
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.25s ease;
@@ -184,6 +219,16 @@ function processOrederQuantity() {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.oc-enter-active,
+.oc-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.oc-enter-from,
+.oc-leave-to {
+  transform: translateY(-10%);
 }
 
 @media screen and (min-width: 1200px) {
