@@ -8,11 +8,11 @@ const props = defineProps({
 
 <template>
   <div class="confirm flex col btw">
-    <div class="check flex col even ">
-      <div class="">
+    <div class="check flex col even bd">
+      <div class="bd">
         <img src="/images/icon-order-confirmed.svg" alt="order confirmed" />
       </div>
-      <div class="">
+      <div class="bd">
         <h1>Order Confirmed</h1>
         <p>We hope you enjoy your food!</p>
       </div>
@@ -80,7 +80,7 @@ const props = defineProps({
   }
 
   .check {
-    height: 30%;
+    height: 28%;
   }
 
   .receipt {
