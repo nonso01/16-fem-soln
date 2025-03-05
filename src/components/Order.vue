@@ -106,6 +106,10 @@ h3 {
     font-size: 0.8rem;
     border-radius: 0.6rem;
     padding-inline: 7%;
+    span,
+    b {
+      color: var(--rose-900);
+    }
   }
 
   .btn {
