@@ -141,6 +141,10 @@ h3 {
     width: 60%;
     height: 60%;
 
+    h6 {
+      color: var(--rose-900);
+    }
+
     .q {
       color: var(--red);
     }
