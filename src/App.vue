@@ -245,4 +245,18 @@ function processOrederQuantity() {
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  #app {
+    .container {
+      /* background-color: red; */
+      flex-direction: column;
+
+      .B {
+        width: 85%;
+        align-self: center;
+      }
+    }
+  }
+}
 </style>

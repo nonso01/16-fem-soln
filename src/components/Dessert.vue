@@ -171,4 +171,53 @@ img {
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  #app {
+    h2 {
+      margin: 3% 6%;
+      font-size: 1.8rem;
+    }
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem;
+
+      .items {
+        width: 90%;
+        height: 350px;
+
+        .content {
+          /* width: 100%; */
+          align-self: center;
+          background-position: 100%;
+        }
+
+        .add {
+          width: 60%;
+
+          span {
+            font-size: 0.9rem;
+          }
+        }
+
+        .details {
+          height: 23%;
+          padding-left: 5%;
+          .cat {
+            font-size: 0.9rem;
+          }
+          .name {
+            font-size: 0.95rem;
+          }
+          .price {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
 </style>
