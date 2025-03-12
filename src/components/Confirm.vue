@@ -63,7 +63,7 @@ const props = defineProps({
   padding: 0.8%;
   border-radius: 0.8rem;
   background-color: hsla(20, 50%, 98%, 0.85);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(.3rem);
 
   h1,
   h2,
@@ -106,8 +106,8 @@ const props = defineProps({
     }
 
     .i {
-      height: 45px;
-      width: 45px;
+      height: 2.81rem;
+      width: 2.81rem;
       background: #000;
       img {
         width: 100%;

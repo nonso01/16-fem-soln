@@ -69,10 +69,11 @@ h3 {
   color: var(--red);
 }
 .order {
-  min-height: 200px;
+  min-height: 12.5rem;
   /* width: 300px; */
 
   padding: 3.5% 3.5%;
+  margin-bottom: 5%;
   background-color: #fff;
   border-radius: 0.625rem;
 
@@ -86,11 +87,9 @@ h3 {
 }
 
 .store {
-  /* height: 40px; */
-
   .order-total {
     /* border: 2px solid; */
-    height: 200px;
+    height: 12.5rem;
 
     h3 {
       color: var(--rose-900);
@@ -113,7 +112,7 @@ h3 {
   }
 
   .btn {
-    height: 50px;
+    height: 3.13rem;
     background-color: var(--red);
     border-radius: 2rem;
     font-size: 0.8rem;
@@ -129,7 +128,7 @@ h3 {
 
 .s-item {
   border-bottom: 2px solid var(--rose-100);
-  height: 70px;
+  height: 4.4rem;
   margin-block: 1%;
 
   span {
@@ -154,8 +153,8 @@ h3 {
   }
 
   .cancel {
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: 50%;
     border-color: var(--rose-300);
     cursor: pointer;

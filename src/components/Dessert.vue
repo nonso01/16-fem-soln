@@ -187,7 +187,7 @@ img {
 
       .items {
         width: 90%;
-        height: 350px;
+        height: 21.9rem;
 
         .content {
           /* width: 100%; */

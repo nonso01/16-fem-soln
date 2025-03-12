@@ -169,7 +169,7 @@ function processOrederQuantity() {
     ></div>
   </Transition>
 
-  <Transition name="oc">
+  <Transition>
     <div class="o-c even center flex" v-if="showOC">
       <img src="/images/icon-order-confirmed.svg" alt="confirmed" />
       <p>Order Confirmed</p>
@@ -197,14 +197,16 @@ function processOrederQuantity() {
   top: 0;
   z-index: 5;
   background: #27272797;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(0.3rem);
 }
 
 .o-c {
   position: fixed;
   top: 2%;
-  width: 230px;
-  height: 70px;
+  left: 50%;
+  transform: translate3d(-50%, -2%, 0);
+  width: 14.4rem;
+  height: 4.4rem;
   border-radius: 0.625rem;
   background-color: rgb(255, 255, 255);
   color: var(--rose-900);
@@ -221,15 +223,6 @@ function processOrederQuantity() {
   opacity: 0;
 }
 
-.oc-enter-active,
-.oc-leave-active {
-  transition: transform 0.2s ease;
-}
-
-.oc-enter-from,
-.oc-leave-to {
-  transform: translateY(-10%);
-}
 
 @media screen and (min-width: 1200px) {
   /* better than 1920px */
@@ -249,7 +242,6 @@ function processOrederQuantity() {
 @media screen and (max-width: 600px) {
   #app {
     .container {
-      /* background-color: red; */
       flex-direction: column;
 
       .B {
