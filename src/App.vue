@@ -15,6 +15,9 @@ const orderTotalQuantity = ref(0);
 const showOverlay = ref(false);
 const showOC = ref(false);
 
+const RESET_TIMEOUT = 600;
+const CONFIRM_TIMEOUT = 1500;
+
 function handleMinus(name, price, imageSrc) {
   if (!isQuantityVisible.value[name]) return;
   // Don't decrement if not visible
@@ -26,10 +29,10 @@ function handleMinus(name, price, imageSrc) {
     ? (isQuantityVisible.value[name] = false)
     : void 0;
 
-  processOreder(name, price, imageSrc);
+  processOrder(name, price, imageSrc);
 
   handleIsNotEmpty();
-  processOrederTotal();
+  processOrderTotal();
 }
 
 function handlePlus(name, price, imageSrc) {
@@ -37,17 +40,17 @@ function handlePlus(name, price, imageSrc) {
   // Don't increment if not visible
   quantities.value[name] = (quantities.value[name] || 0) + 1;
 
-  processOreder(name, price, imageSrc);
+  processOrder(name, price, imageSrc);
 
   handleIsNotEmpty();
-  processOrederTotal();
+  processOrderTotal();
 }
 
 function handleIsQuantityVisible(name) {
   isQuantityVisible.value[name] = !isQuantityVisible.value[name];
 
   // Optionally, reset to 0 if hiding, or initialize if showing
-  if (!isQuantityVisible[name]) {
+  if (!isQuantityVisible.value[name]) {
     quantities.value[name] = 0;
   } else if (!(name in quantities.value)) {
     quantities.value[name] = 0;
@@ -55,9 +58,7 @@ function handleIsQuantityVisible(name) {
 }
 
 function handleIsNotEmpty() {
-  Object.entries(orderData.value).length === 0
-    ? (notEmpty.value = false)
-    : (notEmpty.value = true);
+  notEmpty.value = Object.keys(orderData.value).length > 0;
 }
 
 function handleCancelOrderItem(name) {
@@ -68,7 +69,7 @@ function handleCancelOrderItem(name) {
 
     handleIsNotEmpty();
 
-    processOrederTotal();
+    processOrderTotal();
   }
 }
 
@@ -87,14 +88,14 @@ function handleStartNewOrder() {
     isQuantityVisible.value = {};
     orderTotalCost.value = 0;
     orderTotalQuantity.value = 0;
-  }, 600);
+  }, RESET_TIMEOUT);
 
   setTimeout(() => {
     showOC.value = false;
-  }, 1500);
+  }, CONFIRM_TIMEOUT);
 }
 
-function processOreder(name, price, imageSrc) {
+function processOrder(name, price, imageSrc) {
   orderData.value[name] = {
     quantity: quantities.value[name],
     price,
@@ -106,17 +107,15 @@ function processOreder(name, price, imageSrc) {
   return orderData.value;
 }
 
-function processOrederTotal() {
-  let num = [];
-  Object.entries(orderData.value).forEach((item) => {
-    let mul = item[1].price * item[1].quantity;
-    num.push(mul);
-  });
-  orderTotalCost.value = num.reduce((acc, val) => acc + val, 0);
-  processOrederQuantity();
+function processOrderTotal() {
+  orderTotalCost.value = Object.values(orderData.value).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  processOrderQuantity();
 }
 
-function processOrederQuantity() {
+function processOrderQuantity() {
   let num = [];
   Object.entries(orderData.value).forEach((item) => {
     num.push(item[1].quantity);
@@ -170,8 +169,8 @@ function processOrederQuantity() {
   </Transition>
 
   <Transition>
-    <div class="o-c even center flex" v-if="showOC">
-      <img src="/images/icon-order-confirmed.svg" alt="confirmed" />
+    <div class="o-c even center flex" v-if="showOC" role="alert">
+      <img src="/images/icon-order-confirmed.svg" alt="Order confirmed icon" />
       <p>Order Confirmed</p>
     </div>
   </Transition>
@@ -222,7 +221,6 @@ function processOrederQuantity() {
 .v-leave-to {
   opacity: 0;
 }
-
 
 @media screen and (min-width: 1200px) {
   /* better than 1920px */

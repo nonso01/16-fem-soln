@@ -20,7 +20,11 @@ const props = defineProps({
 
     <div class="receipt flex col btw">
       <div class="items">
-        <div class="item flex btw" v-for="item in Object.entries(data)">
+        <div
+          class="item flex btw"
+          v-for="(item, index) in Object.entries(data)"
+          :key="index"
+        >
           <div class="p flex center">
             <div class="i">
               <img :src="item[1].imageSrc" alt="" />
@@ -63,7 +67,7 @@ const props = defineProps({
   padding: 0.8%;
   border-radius: 0.8rem;
   background-color: hsla(20, 50%, 98%, 0.85);
-  backdrop-filter: blur(.3rem);
+  backdrop-filter: blur(0.3rem);
 
   h1,
   h2,
