@@ -85,11 +85,9 @@ img {
   height: 100%;
 
   .details {
-    /* border-color: red; */
     height: 21%;
     flex-direction: column;
     font-weight: 600;
-    /* width: 90%; */
 
     p {
       font-size: 0.7rem;
@@ -165,7 +163,6 @@ img {
       color: var(--rose-50);
 
       img:hover {
-        /* border: 2px solid; */
         scale: 1.8;
       }
     }
