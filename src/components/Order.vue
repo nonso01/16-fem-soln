@@ -70,7 +70,6 @@ h3 {
 }
 .order {
   min-height: 12.5rem;
-  /* width: 300px; */
 
   padding: 3.5% 3.5%;
   margin-bottom: 5%;

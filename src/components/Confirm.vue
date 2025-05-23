@@ -123,20 +123,12 @@ const props = defineProps({
       min-height: 80%;
       overflow: auto;
       &::-webkit-scrollbar-track {
-        /* box-shadow: inset 0 0 6px rgb(0 0 0 / 0.3);
-        border-radius: 0.625rem;
-        background-color: #f5f5f5; */
         display: none;
       }
       &::-webkit-scrollbar {
-        /* width: 0.2rem;
-        background-color: #f5f5f5; */
         display: none;
       }
       &::-webkit-scrollbar-thumb {
-        /* border-radius: 0.2rem;
-        box-shadow: inset 0 0 6px rgb(0 0 0 / 0.3);
-        background-color: var(--rose-300); */
         display: none;
       }
     }
@@ -156,6 +148,21 @@ const props = defineProps({
     font-weight: 600;
     color: var(--rose-100);
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #app {
+    .confirm {
+      /* border: 2px solid red; */
+      width: 90%;
+      height: 60%;
+      padding: 2%;
+
+      .btn {
+        border-radius: 0.4rem;
+      }
+    }
   }
 }
 </style>
