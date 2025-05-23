@@ -169,6 +169,19 @@ img {
   }
 }
 
+@media screen and (max-width: 1080px) {
+  #app {
+    .dessert {
+      height: 81.2rem; /* giving grid rooms */
+    }
+    .cover {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+    }
+  }
+  
+}
+
 @media screen and (max-width: 600px) {
   #app {
     h2 {
