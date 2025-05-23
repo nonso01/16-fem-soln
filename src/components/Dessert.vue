@@ -83,6 +83,7 @@ img {
 }
 .dessert {
   height: 100%;
+  /* opacity: .1; */
 
   .details {
     height: 21%;
@@ -184,6 +185,9 @@ img {
 
 @media screen and (max-width: 600px) {
   #app {
+    .dessert {
+      height: 100%;
+    }
     h2 {
       margin: 3% 6%;
       font-size: 1.8rem;
