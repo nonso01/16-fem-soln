@@ -164,12 +164,11 @@ h3 {
   }
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   #app {
     .order {
-      border: 2px solid;
-      /* height: 100px; */
+    
     }
   }
-}
+} */
 </style>
